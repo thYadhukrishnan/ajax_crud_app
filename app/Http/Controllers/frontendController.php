@@ -78,7 +78,7 @@ class frontendController extends Controller
             $output='';
             if(count($data)>0){
                 $output = '<ul class="list-group" style="display:block;position:relative;">';
-                
+
                     foreach($data as $row){
                         $output .='<li class="list-group-item">'.$row->name.'</li>';
 
@@ -95,11 +95,21 @@ class frontendController extends Controller
         return view('search');
     }
 
-    public function searchx(Request $request)
-    {
-        $query = $request->get('name');
-        $output = Address::where('name', 'LIKE', "%$query%")->get();
+    public function filter(Request $request){
+        $query=Address::query();
+        if($request->ajax()){
+            if(empty($request->name)){
+                $users=$query->get();
 
-        return response()->json($output);
+            }
+            else{
+                $users=$query->where(['id'=>$request->name])->get();
+
+            }
+            
+            return response()->json(['users'=>$users]);
+        }
+        $users=$query->get();
+        return view('filter',compact('users'));
     }
 }
