@@ -1,6 +1,7 @@
 @extends('main')
 @section('content')
 
+
 <table id="datatable" class="table">
     <tr>
         <th scope="col">#</th>
@@ -10,6 +11,8 @@
 
       </tr>
 </table>
+
+<span id="output"> </span>
 
 <script>
     $(document).ready(function(){
@@ -26,7 +29,7 @@
                             <td>`+data.data[i]['email']+`</td>
                             <td>`+data.data[i]['phone']+`</td>
                             <td><a href="edit/`+(data.data[i]['id'])+`" class="btn btn-primary">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a></td>
+                            <a href="#" id ="delete" data-id="`+(data.data[i]['id'])+`" class="btn btn-danger">Delete</a></td>
                             </tr>`);
                     }
                 }
@@ -38,6 +41,23 @@
                 console.log(err.responseText);
             }
         });
+
+        $("#datatable").on("click","#delete",function(){
+            var id =$(this).attr("data-id");
+            var obj=$(this);
+            $.ajax({
+                type:"GET",
+                url:"delete/"+id,
+                success:function(data){
+                    $(obj).parent().parent().remove();
+                    $("#outout").text(data.res);
+                },
+                error:function(err){
+                    console.log(err.responseText);
+                }
+            });
+        })
+
     });
 </script>
 

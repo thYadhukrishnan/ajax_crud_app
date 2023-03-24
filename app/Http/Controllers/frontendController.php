@@ -59,6 +59,47 @@ class frontendController extends Controller
             
         ]);
 
-       // return response()->json(['res'=>'Updated']);
+       return response()->json(['res'=>'Updated']);
+    }
+
+    public function delete($id){
+
+        $address=Address::find($id);
+        $address->delete();
+
+        return response()->json(['res'=>'Deleted...']);
+
+    }
+
+    public function search(Request $request){
+        if($request->ajax()){
+            $data=Address::where('name','LIKE',$request->name.'%')->get();
+
+            $output='';
+            if(count($data)>0){
+                $output = '<ul class="list-group" style="display:block;position:relative;">';
+                
+                    foreach($data as $row){
+                        $output .='<li class="list-group-item">'.$row->name.'</li>';
+
+                    }
+                $output .='</ul>';
+
+            }
+            else{
+                $output .='<li class="list-group-item">No Name Found</li>';
+            }
+            return $output;
+        }
+        
+        return view('search');
+    }
+
+    public function searchx(Request $request)
+    {
+        $query = $request->get('name');
+        $output = Address::where('name', 'LIKE', "%$query%")->get();
+
+        return response()->json($output);
     }
 }

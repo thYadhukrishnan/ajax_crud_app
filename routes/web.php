@@ -20,3 +20,6 @@ Route::post('save',[frontendController::class,'save'])->name('save');
 Route::get('read',[frontendController::class,'read'])->name('read');
 Route::get('edit/{id}',[frontendController::class,'edit'])->name('edit');
 Route::post('update',[frontendController::class,'update'])->name('update');
+Route::get('delete/{id}',[frontendController::class,'delete'])->name('delete');
+Route::get('search',[frontendController::class,'search'])->name('search');
+Route::get('searchx',[frontendController::class,'searchx'])->name('searchx');
