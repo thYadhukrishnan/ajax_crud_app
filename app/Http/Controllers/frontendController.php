@@ -112,4 +112,14 @@ class frontendController extends Controller
         $users=$query->get();
         return view('filter',compact('users'));
     }
+    public function pagination(){
+        $address=Address::paginate(5);
+        return view('pagination',compact('address'));
+    }
+    public function fetch(Request $request){
+        if($request->ajax()){
+            $address=Address::paginate(5);
+            return view('pagination1',compact('address'))->render();
+        }
+    }
 }

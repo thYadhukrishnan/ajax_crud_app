@@ -29,6 +29,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('filter')}}">Filter</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('pagination')}}">Pagination</a>
+            </li>
           </ul>
         </div>
       </nav>

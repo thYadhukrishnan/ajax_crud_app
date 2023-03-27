@@ -23,3 +23,5 @@ Route::post('update',[frontendController::class,'update'])->name('update');
 Route::get('delete/{id}',[frontendController::class,'delete'])->name('delete');
 Route::get('search',[frontendController::class,'search'])->name('search');
 Route::get('filter',[frontendController::class,'filter'])->name('filter');
+Route::get('pagination',[frontendController::class,'pagination'])->name('pagination');
+Route::post('fetch',[frontendController::class,'fetch'])->name('fetch');
